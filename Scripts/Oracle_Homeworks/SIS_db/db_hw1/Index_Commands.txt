@@ -1,0 +1,12 @@
+CREATE INDEX idx_departments_faculty_id ON Departments(faculty_id);
+
+CREATE INDEX idx_students_department_id ON Students(department_id);
+
+CREATE INDEX idx_courses_department_id ON Courses(department_id);
+CREATE INDEX idx_courses_semester_id ON Courses(semester_id);
+
+CREATE INDEX idx_enrollments_student_id ON Enrollments(student_id);
+CREATE INDEX idx_enrollments_course_id ON Enrollments(course_id);
+
+CREATE INDEX idx_course_teachers_course_id ON Course_Teachers(course_id);
+CREATE INDEX idx_course_teachers_teacher_id ON Course_Teachers(teacher_id);

@@ -1,0 +1,30 @@
+// create tablespace and datafile for sis user.
+CREATE TABLESPACE sis_data 
+DATAFILE '/u02/oradata/CDB1/pdb1/sis_data01.dbf' 
+SIZE 100M 
+AUTOEXTEND ON 
+NEXT 10M 
+MAXSIZE 1000M
+LOGGING;
+
+// assign default tablespace of sis user as sis_data tablespace.
+ALTER USER SIS DEFAULT TABLESPACE sis_data;
+ALTER USER SIS QUOTA UNLIMITED ON sis_data;
+
+// move existing tables to tablespace.
+BEGIN
+   FOR t IN (SELECT table_name FROM all_tables WHERE owner = 'SIS') LOOP
+      EXECUTE IMMEDIATE 'ALTER TABLE SIS.' || t.table_name || ' MOVE TABLESPACE sis_data';
+   END LOOP;
+END;
+/
+
+// see tablespace_name of user's tables.
+SELECT table_name, tablespace_name 
+FROM all_tables 
+WHERE owner = 'SIS';
+
+
+
+
+

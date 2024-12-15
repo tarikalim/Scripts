@@ -1,0 +1,49 @@
+Redo Buffers                7639040 bytes
+Database mounted.
+Database opened.
+SQL> alter pluggable database ${PDB_NAME} save state;
+alter pluggable database ${PDB_NAME} save state
+                         *
+ERROR at line 1:
+ORA-00911: invalid character
+
+
+SQL> alter pluggable database all open;
+
+Pluggable database altered.
+
+SQL> show pdbs;
+
+    CON_ID CON_NAME                       OPEN MODE  RESTRICTED
+---------- ------------------------------ ---------- ----------
+         2 PDB$SEED                       READ ONLY  NO
+         3 PDB1                           READ WRITE NO
+SQL> SELECT SYS_CONTEXT('USERENV', 'CON_NAME') FROM DUAL;
+
+SYS_CONTEXT('USERENV','CON_NAME')
+--------------------------------------------------------------------------------
+CDB$ROOT
+
+SQL> ALTER SESSION SET CONTAINER = pdb1;
+
+Session altered.
+
+SQL> SELECT SYS_CONTEXT('USERENV', 'CON_NAME') FROM DUAL;
+
+SYS_CONTEXT('USERENV','CON_NAME')
+--------------------------------------------------------------------------------
+PDB1
+
+SQL> create user sis identified by omu38aj6;
+
+User created.
+
+SQL> GRANT CONNECT, RESOURCE TO sis;
+
+Grant succeeded.
+
+SQL> GRANT UNLIMITED TABLESPACE TO sis;
+
+Grant succeeded.
+
+SQL>

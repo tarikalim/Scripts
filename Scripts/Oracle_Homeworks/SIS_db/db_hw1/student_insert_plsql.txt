@@ -1,0 +1,16 @@
+BEGIN
+   FOR i IN 1..50000 LOOP
+      INSERT INTO Students (student_id, first_name, last_name, email, department_id, enrollment_date)
+      VALUES (
+         i, 
+         'FirstName' || i, 
+         'LastName' || i, 
+         'student' || i || '@example.com',
+         MOD(i, 29) + 1, 
+         TO_DATE('01-09-2024', 'DD-MM-YYYY') 
+      );
+   END LOOP;
+
+   COMMIT;
+END;
+/

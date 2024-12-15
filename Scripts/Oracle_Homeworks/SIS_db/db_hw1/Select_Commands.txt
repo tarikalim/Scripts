@@ -1,0 +1,59 @@
+SELECT * FROM Faculties;
+SELECT * FROM Departments;
+SELECT * FROM Students;
+SELECT * FROM Semesters;
+SELECT * FROM Courses;
+SELECT * FROM Teachers;
+SELECT * FROM Enrollments;
+SELECT * FROM Course_Teachers;
+----------------------------------------------------
+SELECT 
+    s.first_name || ' ' || s.last_name AS student_name,
+    c.course_name,
+    t.first_name || ' ' || t.last_name AS teacher_name
+FROM 
+    Students s
+JOIN 
+    Enrollments e ON s.student_id = e.student_id
+JOIN 
+    Courses c ON e.course_id = c.course_id
+JOIN 
+    Course_Teachers ct ON c.course_id = ct.course_id
+JOIN 
+    Teachers t ON ct.teacher_id = t.teacher_id
+WHERE 
+    s.student_id = 1;  
+--------------------------------------------------
+SELECT 
+    f.faculty_name,
+    d.department_name,
+    s.first_name || ' ' || s.last_name AS student_name,
+    c.course_name
+FROM 
+    Faculties f
+JOIN 
+    Departments d ON f.faculty_id = d.faculty_id
+JOIN 
+    Students s ON d.department_id = s.department_id
+JOIN 
+    Enrollments e ON s.student_id = e.student_id
+JOIN 
+    Courses c ON e.course_id = c.course_id
+WHERE 
+    f.faculty_id = 1;
+-------------------------------------------------
+SELECT 
+    sem.semester_name,
+    c.course_name,
+    COUNT(e.student_id) AS student_count
+FROM 
+    Semesters sem
+JOIN 
+    Courses c ON sem.semester_id = c.semester_id
+LEFT JOIN 
+    Enrollments e ON c.course_id = e.course_id
+WHERE 
+    sem.semester_id = 1 
+GROUP BY 
+    sem.semester_name, c.course_name;
+--------------------------------------------------------

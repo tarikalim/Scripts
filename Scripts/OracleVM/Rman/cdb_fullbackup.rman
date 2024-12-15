@@ -1,0 +1,26 @@
+RUN
+{
+  # Switch the archive log and create a new archived log file
+  sql 'alter system archive log current';
+
+  # Enable automatic control file backup
+  configure controlfile autobackup on;
+
+  # Allocate a single disk channel for backup
+  ALLOCATE CHANNEL c1 DEVICE TYPE disk;
+
+  # Perform a full database backup with a custom tag
+backup database tag CDB_FULLBACKUP_MAIN format '/u03/oracle/recovery_area/BACKUP_%d_%T_%s_%p_FULL';
+
+  # Switch the archive log and backup the redo log
+  sql 'alter system archive log current';
+
+  # Backup all archive logs with a custom tag 'MY_CDB_ARCHIVE_BACKUP'
+backup tag CDB_FULLBACKUP_ARCHIVE format '/u03/oracle/recovery_area/%d_%T_%s_%p_ARCHIVE' archivelog all;
+
+  # Backup the current control file with a custom tag 'MY_CONTROLFILE_BACKUP'
+ backup tag CDB_FULLBACKUP_CONTROL current controlfile format '/u03/oracle/recovery_area/%d_%T_%s_%p_CONTROL';
+
+  # Release the disk channel
+  release channel c1;
+}

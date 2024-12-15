@@ -1,0 +1,22 @@
+DECLARE
+   v_enrollment_id NUMBER := 1;
+BEGIN
+   FOR student_id IN 1..50000 LOOP
+      FOR course_id IN 1..20 LOOP
+         FOR semester_id IN 1..2 LOOP
+            INSERT INTO Enrollments (enrollment_id, student_id, course_id, grade, semester_id)
+            VALUES (
+               v_enrollment_id, 
+               student_id, 
+               course_id, 
+               NULL, 
+               semester_id
+            );
+            v_enrollment_id := v_enrollment_id + 1;
+         END LOOP;
+      END LOOP;
+   END LOOP;
+
+   COMMIT;
+END;
+/

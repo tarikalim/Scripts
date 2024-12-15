@@ -1,0 +1,37 @@
+INSERT INTO Faculties (faculty_id, faculty_name) VALUES (1, 'Engineering');
+INSERT INTO Faculties (faculty_id, faculty_name) VALUES (2, 'Arts');
+INSERT INTO Faculties (faculty_id, faculty_name) VALUES (3, 'Sciences');
+
+INSERT INTO Departments (department_id, department_name, faculty_id) VALUES (1, 'Computer Science', 1);
+INSERT INTO Departments (department_id, department_name, faculty_id) VALUES (2, 'Mechanical Engineering', 1);
+INSERT INTO Departments (department_id, department_name, faculty_id) VALUES (3, 'Literature', 2);
+INSERT INTO Departments (department_id, department_name, faculty_id) VALUES (4, 'Physics', 3);
+
+INSERT INTO Semesters (semester_id, semester_name, start_date, end_date) VALUES (1, 'Fall 2024', TO_DATE('01-09-2024', 'DD-MM-YYYY'), TO_DATE('31-12-2024', 'DD-MM-YYYY'));
+INSERT INTO Semesters (semester_id, semester_name, start_date, end_date) VALUES (2, 'Spring 2025', TO_DATE('01-01-2025', 'DD-MM-YYYY'), TO_DATE('31-05-2025', 'DD-MM-YYYY'));
+
+INSERT INTO Courses (course_id, course_name, credits, department_id, semester_id) VALUES (1, 'Database Systems', 4, 1, 1);
+INSERT INTO Courses (course_id, course_name, credits, department_id, semester_id) VALUES (2, 'Thermodynamics', 3, 2, 1);
+INSERT INTO Courses (course_id, course_name, credits, department_id, semester_id) VALUES (3, 'Modern Literature', 3, 3, 2);
+INSERT INTO Courses (course_id, course_name, credits, department_id, semester_id) VALUES (4, 'Quantum Physics', 4, 4, 1);
+
+INSERT INTO Teachers (teacher_id, first_name, last_name, email) VALUES (1, 'Kemal', 'Aydın', 'kemal.aydin@example.com');
+INSERT INTO Teachers (teacher_id, first_name, last_name, email) VALUES (2, 'Elif', 'Güneş', 'elif.gunes@example.com');
+INSERT INTO Teachers (teacher_id, first_name, last_name, email) VALUES (3, 'Murat', 'Koç', 'murat.koc@example.com');
+
+INSERT INTO Course_Teachers (course_id, teacher_id) VALUES (1, 1); 
+INSERT INTO Course_Teachers (course_id, teacher_id) VALUES (2, 2); 
+INSERT INTO Course_Teachers (course_id, teacher_id) VALUES (3, 3);  
+INSERT INTO Course_Teachers (course_id, teacher_id) VALUES (4, 1); 
+INSERT INTO Course_Teachers (course_id, teacher_id) VALUES (4, 2);  
+
+INSERT INTO Students (student_id, first_name, last_name, email, department_id, enrollment_date) VALUES (1, 'Ahmet', 'Yılmaz', 'ahmet.yilmaz@example.com', 1, TO_DATE('15-08-2024', 'DD-MM-YYYY'));
+INSERT INTO Students (student_id, first_name, last_name, email, department_id, enrollment_date) VALUES (2, 'Ayşe', 'Kaya', 'ayse.kaya@example.com', 2, TO_DATE('15-08-2024', 'DD-MM-YYYY'));
+INSERT INTO Students (student_id, first_name, last_name, email, department_id, enrollment_date) VALUES (3, 'Mehmet', 'Demir', 'mehmet.demir@example.com', 3, TO_DATE('15-08-2024', 'DD-MM-YYYY'));
+INSERT INTO Students (student_id, first_name, last_name, email, department_id, enrollment_date) VALUES (4, 'Fatma', 'Çelik', 'fatma.celik@example.com', 4, TO_DATE('15-08-2024', 'DD-MM-YYYY'));
+
+INSERT INTO Enrollments (enrollment_id, student_id, course_id, grade) VALUES (1, 1, 1, 'A'); 
+INSERT INTO Enrollments (enrollment_id, student_id, course_id, grade) VALUES (2, 2, 2, 'B');  
+INSERT INTO Enrollments (enrollment_id, student_id, course_id, grade) VALUES (3, 3, 3, 'A');  
+INSERT INTO Enrollments (enrollment_id, student_id, course_id, grade) VALUES (4, 4, 4, 'B');  
+INSERT INTO Enrollments (enrollment_id, student_id, course_id, grade) VALUES (5, 1, 4, 'A');  
